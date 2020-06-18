@@ -5,7 +5,7 @@ import './Blog.css';
 //eiani t instance t katw
 import axios from '../../axios';
 import Posts from '../Posts/Posts'
-import {Route, Link} from 'react-router-dom';
+import {Route, NavLink, Switch} from 'react-router-dom';
 import NewPost from '../NewPost/NewPost';
 
 class Blog extends Component {
@@ -19,18 +19,32 @@ class Blog extends Component {
                 <header>
                     <nav>
                         <ul>
-                            <li><Link to="/">Home</Link></li>
-                            <li><Link to={{
-                                pathname:'/new-post',
+                            <li><NavLink
+                                 to="/" 
+                                 exact
+                                 //activeclassname giana mi parei tis allges apo css
+                                 activeClassName="my-active"
+                                 //line styling 
+                                 activeStyle={{
+                                     color: '#fa923f',
+                                     textDecoration: 'underline'
+                                 }}>Home</NavLink></li>
+                            <li><NavLink to={{
+                                //gia relative path, t match t pairnouem apo
+                                // to console,
+                                pathname:  '/new-post',
                                 
-                            }}>New post</Link></li>
+                            }}>New post</NavLink></li>
                         </ul>
                     </nav>
                 </header>
                 {/* <Route path="/" exact render={() => <h1>Home</h1>}/> */}
-                <Route path="/" exact component={Posts} />
+               {/* // to switch tha kaneis render mono to prwto 
+               //route pou tha vrei kai tha stamatisei */}
+                <Switch>
                 <Route path="/new-post"  component={NewPost} />
-
+                <Route path="/"  component={Posts} />
+                </Switch>
             </div>
         );
     }
